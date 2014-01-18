@@ -3,7 +3,22 @@
       package="com.sandfox.wunderhack"
       android:versionCode="1"
       android:versionName="1.0">
+
+        <uses-feature
+                android:glEsVersion="0x00020000"
+                android:required="true"/>
+
+        <uses-permission android:name="android.permission.INTERNET"/>
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="4132500" />
         <activity android:name="mainActivity"
                   android:label="@string/app_name">
             <intent-filter>
@@ -11,5 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDt5O-GKdF58iNKRg6HBeIx1wg3ejgI4Ww"/>
     </application>
 </manifest>
