@@ -1,9 +1,14 @@
 package com.sandfox.wunderhack;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import com.google.android.gms.maps.*;
@@ -22,14 +27,23 @@ public class mainActivity extends FragmentActivity
 
 	private GoogleMap mMap;
 	private int addMarkCheck = 0;
-	
-
+	private double lat, lon;
+	private String FILENAME = "coords";
+	private byte [] fisbyte;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         initMap();
+        
+        try {
+			FileInputStream fis = openFileInput(FILENAME);
+		//	String coords = String(fis.read());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
         mMap.setOnMapClickListener(new OnMapClickListener() {
     	
@@ -38,15 +52,27 @@ public class mainActivity extends FragmentActivity
     			if (addMarkCheck == 1){
     				mMap.addMarker(new MarkerOptions()
     						.position(arg0));
+    				
+    				lat = arg0.latitude;
+    				lon = arg0.longitude;
+    				
     				Toast.makeText(getApplicationContext(), arg0.latitude + "" 
     								+ arg0.longitude, 1).show();
-    				
+    				    				
+    				    				
     				addMarkCheck = 0;
     			}
     		}
     	});
     }
     
+    public void writeToInternal() throws IOException {
+        FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+        fos.write((lat+""+lon).getBytes());
+        fos.close();
+    }
+    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -81,6 +107,9 @@ public class mainActivity extends FragmentActivity
         switch (item.getItemId()) {
             case R.id.menu_marker:
                 addMarkCheck = 1;
+                Intent i = new Intent(this, optionsActivity.class);
+				startActivity(i);
+				return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

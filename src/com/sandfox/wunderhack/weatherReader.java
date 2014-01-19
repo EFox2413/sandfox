@@ -66,8 +66,8 @@ public class weatherReader {
         }
 
 
-        public ArrayList<HourWeather> parsedHourly10Day(String state, String city) {
-                ArrayList<HourWeather> listOfHours = new ArrayList<HourWeather>();
+        public ArrayList<hourWeather> parsedHourly10Day(String state, String city) {
+                ArrayList<hourWeather> listOfHours = new ArrayList<hourWeather>();
                 String toBeParsed = hourly10Day(state,city);
                 int length = toBeParsed.length();
                 int i1 = toBeParsed.indexOf("FCTTIME",0);
@@ -88,7 +88,7 @@ public class weatherReader {
                         String condition =getJSONField(onehour,"condition");
                         //System.out.println(hour + " " + minute + " " + day + " " + month + " " + year);                        
                         dateTime.set(year, month, day,  hour,  minute);
-                        listOfHours.add(new HourWeather(dateTime,condition));
+                        listOfHours.add(new hourWeather(dateTime,condition));
                         i1=i2;
 
 

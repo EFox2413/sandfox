@@ -1,9 +1,11 @@
+package com.sandfox.wunderhack;
+
 import java.util.Calendar;
 
-public class HourWeather {
+public class hourWeather {
         private Calendar dateTime;
         private String condition;
-        public HourWeather(Calendar c, String condition) {
+        public hourWeather(Calendar c, String condition) {
                 dateTime = c;
                 this.condition = condition;
 
